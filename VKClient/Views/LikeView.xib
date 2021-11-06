@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LikeView" customModule="VKClient" customModuleProvider="target">
+            <connections>
+                <outlet property="likeCounter" destination="69Z-RR-3Rt" id="nQw-eV-hGT"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="310" height="303"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="69Z-RR-3Rt">
+                    <rect key="frame" x="277" y="280.5" width="20" height="20"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="20" id="X0Y-72-lsX"/>
+                        <constraint firstAttribute="height" constant="20" id="du0-WM-LIa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKa-eF-klZ">
+                    <rect key="frame" x="285" y="278" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="25" id="f0d-Qj-JIb"/>
+                        <constraint firstAttribute="width" constant="25" id="oN0-cy-pRW"/>
+                    </constraints>
+                    <color key="tintColor" red="0.81839413925544502" green="0.26681976646389155" blue="0.20659710630392897" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                    <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="2.2250738585072014e-308" maxY="0.0"/>
+                    <state key="normal">
+                        <imageReference key="image" image="heart" catalog="system" symbolScale="medium"/>
+                    </state>
+                    <connections>
+                        <action selector="pressLikeButton:" destination="-1" eventType="touchUpInside" id="ogI-3u-dg7"/>
+                    </connections>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <constraints>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="pKa-eF-klZ" secondAttribute="bottom" id="Ffe-ay-kgi"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="pKa-eF-klZ" secondAttribute="trailing" id="Fhx-gV-6Cv"/>
+                <constraint firstItem="pKa-eF-klZ" firstAttribute="leading" secondItem="69Z-RR-3Rt" secondAttribute="trailing" constant="-12" id="aFM-4l-D6P"/>
+                <constraint firstItem="69Z-RR-3Rt" firstAttribute="centerY" secondItem="pKa-eF-klZ" secondAttribute="centerY" id="o7Y-Cg-pI3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="62.318840579710148" y="288.95089285714283"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="heart" catalog="system" width="128" height="109"/>
+    </resources>
+</document>
