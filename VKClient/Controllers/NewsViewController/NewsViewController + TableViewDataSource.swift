@@ -11,14 +11,14 @@ extension NewsViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return posts.count
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNewsCell, for: indexPath) as? NewsCell else {return UITableViewCell()}
-        
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: reuseIdentifierNewsCell, for: indexPath) as? NewsCell else { return UITableViewCell() }
+
         cell.configure(post: posts[indexPath.row])
-        
+
         return cell
     }
-    
-    
+
+
 }

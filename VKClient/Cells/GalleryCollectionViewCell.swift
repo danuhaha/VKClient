@@ -10,7 +10,7 @@ import UIKit
 class GalleryCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var likeView: LikeView!
-    
+
     @IBOutlet weak var photoImageView: UIImageView!
 
 
@@ -33,6 +33,6 @@ class GalleryCollectionViewCell: UICollectionViewCell {
         likeView.layer.cornerRadius = 3
     }
 
-    
+
 
 }

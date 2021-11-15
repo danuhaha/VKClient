@@ -13,6 +13,9 @@ class GalleryViewController: UIViewController {
 
     var photos = [UIImage]()
 
+    var fullScreenView: UIView?
+    var galleryView: GallerylView?
+
     override func viewDidLoad() {
         super.viewDidLoad()
 

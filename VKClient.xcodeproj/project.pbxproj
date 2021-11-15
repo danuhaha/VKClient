@@ -29,12 +29,13 @@
 		8C2B47C2272D9B7F007BF69C /* ProfileViewController + PostsDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47C1272D9B7F007BF69C /* ProfileViewController + PostsDataSource.swift */; };
 		8C2B47C5272D9BD1007BF69C /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47C4272D9BD1007BF69C /* Post.swift */; };
 		8C2B47C7272DDA80007BF69C /* ProfileViewController + PostsDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47C6272DDA80007BF69C /* ProfileViewController + PostsDelegate.swift */; };
-		8C2B47C9272DE1BD007BF69C /* ProfileViewController + CollectionDelegate .swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47C8272DE1BD007BF69C /* ProfileViewController + CollectionDelegate .swift */; };
 		8C2B47CB272DE2EF007BF69C /* ProfileViewController + CollectionFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47CA272DE2EF007BF69C /* ProfileViewController + CollectionFlowLayout.swift */; };
 		8C2B47DE272F3814007BF69C /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47DD272F3814007BF69C /* UIScrollView+EmptyDataSet.m */; };
 		8C2B47E1272FD16E007BF69C /* FriendCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C2B47DF272FD16E007BF69C /* FriendCell.swift */; };
 		8C2B47E2272FD16E007BF69C /* FriendCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C2B47E0272FD16E007BF69C /* FriendCell.xib */; };
 		8C34209A2726F571006B6F59 /* FriendsViewController + FillFriendsArray.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C3420992726F571006B6F59 /* FriendsViewController + FillFriendsArray.swift */; };
+		8C366197274170CB00290726 /* GalleryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C366196274170CB00290726 /* GalleryView.xib */; };
+		8C366199274170FE00290726 /* GalleryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C366198274170FE00290726 /* GalleryView.swift */; };
 		8C594F6427275C160025C670 /* AvatarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C594F6327275C160025C670 /* AvatarView.swift */; };
 		8C594F6627275CED0025C670 /* AvatarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C594F6527275CED0025C670 /* AvatarView.xib */; };
 		8C594F68272771F70025C670 /* LikeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C594F67272771F70025C670 /* LikeView.swift */; };
@@ -43,6 +44,8 @@
 		8C600552272882EF00F4561E /* NewsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C600551272882EF00F4561E /* NewsViewController.swift */; };
 		8C600556272886BC00F4561E /* NewsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8C600554272886BC00F4561E /* NewsCell.swift */; };
 		8C600557272886BC00F4561E /* NewsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8C600555272886BC00F4561E /* NewsCell.xib */; };
+		8CAB924C27368E7A0060FD67 /* UIScrollView+EmptyDataSet.m in Sources */ = {isa = PBXBuildFile; fileRef = 8CAB924A27368E7A0060FD67 /* UIScrollView+EmptyDataSet.m */; };
+		8CAB927427395BD80060FD67 /* GalleryViewController + FullScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CAB927327395BD80060FD67 /* GalleryViewController + FullScreenView.swift */; };
 		8CCFC5A52722E8C200C40A25 /* GalleryCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFC5A32722E8C200C40A25 /* GalleryCollectionViewCell.swift */; };
 		8CCFC5A62722E8C200C40A25 /* GalleryCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8CCFC5A42722E8C200C40A25 /* GalleryCollectionViewCell.xib */; };
 		8CCFC5AA2722EC3100C40A25 /* FriendsViewController + TableViewDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFC5A92722EC3100C40A25 /* FriendsViewController + TableViewDelegate.swift */; };
@@ -79,14 +82,14 @@
 		8C2B47C1272D9B7F007BF69C /* ProfileViewController + PostsDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController + PostsDataSource.swift"; sourceTree = "<group>"; };
 		8C2B47C4272D9BD1007BF69C /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		8C2B47C6272DDA80007BF69C /* ProfileViewController + PostsDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController + PostsDelegate.swift"; sourceTree = "<group>"; };
-		8C2B47C8272DE1BD007BF69C /* ProfileViewController + CollectionDelegate .swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController + CollectionDelegate .swift"; sourceTree = "<group>"; };
 		8C2B47CA272DE2EF007BF69C /* ProfileViewController + CollectionFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ProfileViewController + CollectionFlowLayout.swift"; sourceTree = "<group>"; };
 		8C2B47DB272F3813007BF69C /* VKClient-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "VKClient-Bridging-Header.h"; sourceTree = "<group>"; };
-		8C2B47DC272F3814007BF69C /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "../../../DZNEmptyDataSet-master/Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
 		8C2B47DD272F3814007BF69C /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "../../../DZNEmptyDataSet-master/Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
 		8C2B47DF272FD16E007BF69C /* FriendCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCell.swift; sourceTree = "<group>"; };
 		8C2B47E0272FD16E007BF69C /* FriendCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FriendCell.xib; sourceTree = "<group>"; };
 		8C3420992726F571006B6F59 /* FriendsViewController + FillFriendsArray.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsViewController + FillFriendsArray.swift"; sourceTree = "<group>"; };
+		8C366196274170CB00290726 /* GalleryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryView.xib; sourceTree = "<group>"; };
+		8C366198274170FE00290726 /* GalleryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryView.swift; sourceTree = "<group>"; };
 		8C594F6327275C160025C670 /* AvatarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarView.swift; sourceTree = "<group>"; };
 		8C594F6527275CED0025C670 /* AvatarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AvatarView.xib; sourceTree = "<group>"; };
 		8C594F67272771F70025C670 /* LikeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LikeView.swift; sourceTree = "<group>"; };
@@ -95,6 +98,9 @@
 		8C600551272882EF00F4561E /* NewsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsViewController.swift; sourceTree = "<group>"; };
 		8C600554272886BC00F4561E /* NewsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsCell.swift; sourceTree = "<group>"; };
 		8C600555272886BC00F4561E /* NewsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NewsCell.xib; sourceTree = "<group>"; };
+		8CAB924A27368E7A0060FD67 /* UIScrollView+EmptyDataSet.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIScrollView+EmptyDataSet.m"; path = "../../../DZNEmptyDataSet-master/Source/UIScrollView+EmptyDataSet.m"; sourceTree = "<group>"; };
+		8CAB924B27368E7A0060FD67 /* UIScrollView+EmptyDataSet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIScrollView+EmptyDataSet.h"; path = "../../../DZNEmptyDataSet-master/Source/UIScrollView+EmptyDataSet.h"; sourceTree = "<group>"; };
+		8CAB927327395BD80060FD67 /* GalleryViewController + FullScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GalleryViewController + FullScreenView.swift"; sourceTree = "<group>"; };
 		8CCFC5A32722E8C200C40A25 /* GalleryCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GalleryCollectionViewCell.swift; sourceTree = "<group>"; };
 		8CCFC5A42722E8C200C40A25 /* GalleryCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = GalleryCollectionViewCell.xib; sourceTree = "<group>"; };
 		8CCFC5A92722EC3100C40A25 /* FriendsViewController + TableViewDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsViewController + TableViewDelegate.swift"; sourceTree = "<group>"; };
@@ -147,9 +153,10 @@
 				8C20BB8E2715EE8300E1B801 /* AppDelegate.swift */,
 				8C20BB902715EE8300E1B801 /* SceneDelegate.swift */,
 				8C20BB9C2715EE8700E1B801 /* Info.plist */,
-				8C2B47DC272F3814007BF69C /* UIScrollView+EmptyDataSet.h */,
+				8CAB924B27368E7A0060FD67 /* UIScrollView+EmptyDataSet.h */,
 				8C2B47DD272F3814007BF69C /* UIScrollView+EmptyDataSet.m */,
 				8C2B47DB272F3813007BF69C /* VKClient-Bridging-Header.h */,
+				8CAB924A27368E7A0060FD67 /* UIScrollView+EmptyDataSet.m */,
 			);
 			path = VKClient;
 			sourceTree = "<group>";
@@ -201,7 +208,6 @@
 				8C2B47BD272D95D5007BF69C /* ProfileViewController + CreateUser.swift */,
 				8C2B47BF272D9AD4007BF69C /* ProfileViewController + CollectionDataSource.swift */,
 				8C2B47CA272DE2EF007BF69C /* ProfileViewController + CollectionFlowLayout.swift */,
-				8C2B47C8272DE1BD007BF69C /* ProfileViewController + CollectionDelegate .swift */,
 				8C2B47C1272D9B7F007BF69C /* ProfileViewController + PostsDataSource.swift */,
 				8C2B47C6272DDA80007BF69C /* ProfileViewController + PostsDelegate.swift */,
 			);
@@ -215,6 +221,8 @@
 				8C594F69272772070025C670 /* LikeView.xib */,
 				8C594F6327275C160025C670 /* AvatarView.swift */,
 				8C594F6527275CED0025C670 /* AvatarView.xib */,
+				8C366198274170FE00290726 /* GalleryView.swift */,
+				8C366196274170CB00290726 /* GalleryView.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -245,6 +253,7 @@
 			isa = PBXGroup;
 			children = (
 				8C20BBB5271B567000E1B801 /* GalleryViewController.swift */,
+				8CAB927327395BD80060FD67 /* GalleryViewController + FullScreenView.swift */,
 				8CCFC5AD2722ED2C00C40A25 /* GalleryViewController + CollectionViewDelegate.swift */,
 				8CCFC5B12722F34000C40A25 /* GalleryViewController + FlowLayout.swift */,
 				8CCFC5AF2722ED5A00C40A25 /* GalleryViewController + CollectionViewDataSource.swift */,
@@ -311,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				8C20BB9B2715EE8700E1B801 /* LaunchScreen.storyboard in Resources */,
+				8C366197274170CB00290726 /* GalleryView.xib in Resources */,
 				8C20BB982715EE8700E1B801 /* Assets.xcassets in Resources */,
 				8C600557272886BC00F4561E /* NewsCell.xib in Resources */,
 				8C20BBAB2718B2EF00E1B801 /* CustomTableViewCell.xib in Resources */,
@@ -333,18 +343,20 @@
 				8C2B47B72729B222007BF69C /* NewsViewController + TableViewDataSource.swift in Sources */,
 				8C2B47B9272AEED8007BF69C /* NewsViewController + FillPostsArray.swift in Sources */,
 				8C594F68272771F70025C670 /* LikeView.swift in Sources */,
+				8C366199274170FE00290726 /* GalleryView.swift in Sources */,
 				8C20BBAA2718B2EF00E1B801 /* CustomTableViewCell.swift in Sources */,
 				8C600552272882EF00F4561E /* NewsViewController.swift in Sources */,
 				8C2B47BE272D95D5007BF69C /* ProfileViewController + CreateUser.swift in Sources */,
 				8C2B47C2272D9B7F007BF69C /* ProfileViewController + PostsDataSource.swift in Sources */,
 				8C2B47BB272D7D36007BF69C /* User.swift in Sources */,
+				8CAB927427395BD80060FD67 /* GalleryViewController + FullScreenView.swift in Sources */,
 				8CCFC5B42722F38C00C40A25 /* Constants.swift in Sources */,
 				8CCFC5AC2722ECFA00C40A25 /* FriendsViewController + TableViewDataSource.swift in Sources */,
 				8CCFC5AA2722EC3100C40A25 /* FriendsViewController + TableViewDelegate.swift in Sources */,
+				8CAB924C27368E7A0060FD67 /* UIScrollView+EmptyDataSet.m in Sources */,
 				8CCFC5AE2722ED2C00C40A25 /* GalleryViewController + CollectionViewDelegate.swift in Sources */,
 				8C600550272882D100F4561E /* ProfileViewController.swift in Sources */,
 				8C20BB932715EE8300E1B801 /* LoginViewController.swift in Sources */,
-				8C2B47C9272DE1BD007BF69C /* ProfileViewController + CollectionDelegate .swift in Sources */,
 				8C20BB8F2715EE8300E1B801 /* AppDelegate.swift in Sources */,
 				8C20BB912715EE8300E1B801 /* SceneDelegate.swift in Sources */,
 				8C20BBB4271B4F0500E1B801 /* AllGroupsViewController.swift in Sources */,

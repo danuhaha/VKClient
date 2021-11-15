@@ -13,10 +13,10 @@ class FriendsViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var searchBar: UISearchBar!
-    
+
     var friendsArray = [Friend]()
     var savedFriendsArray = [Friend]()
-    
+
     func arrayLetter(sourceArray: [Friend]) -> [String] {
         var resultArray = [String]()
         for item in sourceArray {
@@ -43,8 +43,8 @@ class FriendsViewController: UIViewController {
         super.viewDidLoad()
         fillFriendsArray()
         savedFriendsArray = friendsArray
-        tableView.register(UINib(nibName: customTableViewCell , bundle: nil), forCellReuseIdentifier:
-                            reuseIdentifierCustom)
+        tableView.register(UINib(nibName: customTableViewCell, bundle: nil), forCellReuseIdentifier:
+                reuseIdentifierCustom)
         tableView.delegate = self
         tableView.dataSource = self
         searchBar.delegate = self
@@ -52,19 +52,19 @@ class FriendsViewController: UIViewController {
         tapRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapRecognizer)
     }
-    
+
     @objc func tapFunction() {
         self.view.endEditing(true)
     }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "fromFriendsToGallerySegue",
-           //let sourceVC = segue.source as? FriendsViewController,
-           let destinationVC = segue.destination as? GalleryViewController,
-           let friend = sender as? Friend {
+            //let sourceVC = segue.source as? FriendsViewController,
+            let destinationVC = segue.destination as? GalleryViewController,
+            let friend = sender as? Friend {
             destinationVC.photos = friend.photos
         }
-        
+
     }
 }
 
