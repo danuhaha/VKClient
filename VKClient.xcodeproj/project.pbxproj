@@ -55,6 +55,7 @@
 		8CCFC5B22722F34000C40A25 /* GalleryViewController + FlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFC5B12722F34000C40A25 /* GalleryViewController + FlowLayout.swift */; };
 		8CCFC5B42722F38C00C40A25 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFC5B32722F38C00C40A25 /* Constants.swift */; };
 		8CCFC5B6272331C700C40A25 /* FriendsViewController + SearchBarDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CCFC5B5272331C700C40A25 /* FriendsViewController + SearchBarDelegate.swift */; };
+		8CD8D9462745673600DC9C73 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8CD8D9452745673600DC9C73 /* Session.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -110,6 +111,7 @@
 		8CCFC5B12722F34000C40A25 /* GalleryViewController + FlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GalleryViewController + FlowLayout.swift"; sourceTree = "<group>"; };
 		8CCFC5B32722F38C00C40A25 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		8CCFC5B5272331C700C40A25 /* FriendsViewController + SearchBarDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FriendsViewController + SearchBarDelegate.swift"; sourceTree = "<group>"; };
+		8CD8D9452745673600DC9C73 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,8 +148,9 @@
 				8C20BBA72718B2CE00E1B801 /* Cells */,
 				8C594F51272758C40025C670 /* Views */,
 				8C20BBA22718B1A300E1B801 /* Model */,
-				8C20BB942715EE8300E1B801 /* Main.storyboard */,
 				8CCFC5B32722F38C00C40A25 /* Constants.swift */,
+				8CD8D9452745673600DC9C73 /* Session.swift */,
+				8C20BB942715EE8300E1B801 /* Main.storyboard */,
 				8C20BB992715EE8700E1B801 /* LaunchScreen.storyboard */,
 				8C20BB972715EE8700E1B801 /* Assets.xcassets */,
 				8C20BB8E2715EE8300E1B801 /* AppDelegate.swift */,
@@ -359,6 +362,7 @@
 				8C20BB932715EE8300E1B801 /* LoginViewController.swift in Sources */,
 				8C20BB8F2715EE8300E1B801 /* AppDelegate.swift in Sources */,
 				8C20BB912715EE8300E1B801 /* SceneDelegate.swift in Sources */,
+				8CD8D9462745673600DC9C73 /* Session.swift in Sources */,
 				8C20BBB4271B4F0500E1B801 /* AllGroupsViewController.swift in Sources */,
 				8CCFC5B6272331C700C40A25 /* FriendsViewController + SearchBarDelegate.swift in Sources */,
 				8C34209A2726F571006B6F59 /* FriendsViewController + FillFriendsArray.swift in Sources */,
