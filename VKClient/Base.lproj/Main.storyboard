@@ -66,9 +66,17 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <connections>
-                                    <action selector="enterButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="yCG-MF-JEs"/>
+                                    <action selector="pressEnterButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Fx6-AC-UBT"/>
                                 </connections>
                             </button>
+                            <wkWebView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qkg-3E-qRG">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <wkWebViewConfiguration key="configuration">
+                                    <audiovisualMediaTypes key="mediaTypesRequiringUserActionForPlayback" none="YES"/>
+                                    <wkPreferences key="preferences"/>
+                                </wkWebViewConfiguration>
+                            </wkWebView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -85,8 +93,12 @@
                             <constraint firstItem="8bz-Xz-7jb" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="Tl5-Bq-hxY"/>
                             <constraint firstItem="Z3e-sP-sVc" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="WUR-C8-pbR"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Utl-TV-Vgp" secondAttribute="trailing" constant="39" id="ZM9-KS-gpj"/>
+                            <constraint firstItem="Qkg-3E-qRG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="a3L-YV-3fT"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="Qkg-3E-qRG" secondAttribute="bottom" id="apg-ka-Uw5"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="VuL-7q-sEH" secondAttribute="trailing" constant="39" id="bmQ-Rg-9B6"/>
+                            <constraint firstItem="Qkg-3E-qRG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="c0H-Cc-ern"/>
                             <constraint firstItem="zui-5O-GHe" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="drb-bl-OkS"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Qkg-3E-qRG" secondAttribute="trailing" id="fBk-cI-zRj"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="DXh-5i-zM0" secondAttribute="trailing" constant="39" id="gue-eE-CB1"/>
                             <constraint firstItem="VuL-7q-sEH" firstAttribute="top" secondItem="Utl-TV-Vgp" secondAttribute="bottom" constant="12" id="jwj-g9-ye3"/>
                             <constraint firstItem="Z3e-sP-sVc" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.5" id="mdU-mS-8Fo"/>
@@ -102,6 +114,7 @@
                         <outlet property="passwordTextField" destination="dwL-2s-BeK" id="iFW-g7-Vfm"/>
                         <outlet property="vkclientImage" destination="Z3e-sP-sVc" id="n7R-ds-kX7"/>
                         <outlet property="vkclientLabel" destination="zui-5O-GHe" id="g7y-XE-qes"/>
+                        <outlet property="webView" destination="Qkg-3E-qRG" id="Wr6-ei-xvv"/>
                         <segue destination="w2s-r6-Vaz" kind="presentation" identifier="toMainViewSegue" modalPresentationStyle="fullScreen" id="JP6-oM-iky"/>
                     </connections>
                 </viewController>
