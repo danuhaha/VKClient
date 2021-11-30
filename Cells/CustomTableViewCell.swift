@@ -39,7 +39,7 @@ class CustomTableViewCell: UITableViewCell {
 
     func configure(friend: Friend) {
         avatarView.avatarImageView.image = friend.avatar
-        titleLabel.text = friend.name + " " + friend.surname
+        titleLabel.text = friend.firstName + " " + friend.lastName
         subtitleLabel.text = friend.status
     }
 

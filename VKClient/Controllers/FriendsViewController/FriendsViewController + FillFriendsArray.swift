@@ -6,16 +6,114 @@
 //
 
 import UIKit
+import Alamofire
 
 extension FriendsViewController {
-    
-    func fillFriendsArray() {
-        let friend1 = Friend(name: "Lil Uzi", surname: "Vert", avatar: UIImage(named: "liluzi")!, status: "New patek on my wrist", photos: [UIImage(named: "liluzi1")!,UIImage(named: "liluzi2")!,UIImage(named: "liluzi3")!])
-        let friend2 = Friend(name: "Travis", surname: "Scott", avatar: UIImage(named: "travis")!, status: "It's lit!", photos: [UIImage(named: "travis1")!,UIImage(named: "travis2")!,UIImage(named: "travis3")!])
-        let friend3 = Friend(name: "Playboi", surname: "Carti", avatar: UIImage(named: "carti")!, status: "I wanna go to pluto", photos: [UIImage(named: "carti1")!, UIImage(named: "carti2")!, UIImage(named: "carti3")!, UIImage(named: "carti4")!])
-        friendsArray.append(friend1)
-        friendsArray.append(friend2)
-        friendsArray.append(friend3)
-        friendsArray = friendsArray.sorted { $0.name.lowercased() < $1.name.lowercased() }
+
+    func getImage(from url: String) -> UIImage? {
+        var image: UIImage?
+        guard let imageURL = URL(string: url) else { return nil }
+
+        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+        image = UIImage(data: imageData)
+
+        return image
+    }
+
+    func fillFriendsIdsArray(_ friendsInitialResponse: FriendsInitialResponse) {
+        let friendsCount = friendsInitialResponse.response.items.count
+        let friends = friendsInitialResponse.response.items
+
+        for i in 0...friendsCount - 1 {
+            friendsIdsArray.append(friends[i].id)
+        }
+    }
+
+    func fillFriendsArray(_ friendsInitialResponse: FriendsInitialResponse) {
+
+        let friendsCount = friendsInitialResponse.response.items.count
+        let friends = friendsInitialResponse.response.items
+
+        for i in 0...friendsCount - 1 {
+            guard let avatar = getImage(from: friends[i].avatar) else { return }
+            if friends[i].status != "" {
+                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].status, photos: [UIImage()]))
+            } else {
+                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].domain, photos: [UIImage()]))
+            }
+        }
+
+        friendsArray = friendsArray.sorted { $0.firstName.lowercased() < $1.firstName.lowercased() }
+    }
+
+    func getFriendsInitialResponse() {
+
+        AF.request("https://api.vk.com/method/friends.get", parameters: [
+            "v": "5.131",
+            "lang": "en",
+            "order": "hints",
+            "count": "5",
+            "fields": "photo_200,status,domain",
+            "access_token": session.token
+            ]).responseData { data in
+            guard let data = data.value else { return }
+
+            do {
+                guard let response = try? JSONDecoder().decode(FriendsInitialResponse.self, from: data) else { return }
+                self.fillFriendsIdsArray(response)
+                self.fillFriendsArray(response)
+                DispatchQueue.main.async {
+                    self.tableView.reloadData()
+                }
+            }
+        }
     }
 }
+
+
+
+//for i in 0...friendsCount - 1 {
+//    let friendsPhotosCount = friendsPhotosInitialResponse.response.items.count
+//    let friendsPhotos = friendsPhotosInitialResponse.response.items
+//
+//    var photos = [UIImage]()
+//
+//    for j in 0...friendsPhotosCount - 1 {
+//        guard let photo = getImage(from: friendsPhotos[j].sizes[6].url) else { return }
+//        photos.append(photo)
+//    }
+//
+
+
+
+//func getFriendsPhotosInitialResponse() -> [PhotosInitialResponse]? {
+//    var friendsPhotosInitialResponse: [PhotosInitialResponse]?
+//    let friendsInitialResponse = getFriendsInitialResponse()
+//
+//    guard let friendsCount = friendsInitialResponse?.response.items.count,
+//        let friends = friendsInitialResponse?.response.items
+//        else { return nil }
+//
+//
+//    for i in 0...friendsCount - 1 {
+//
+//        AF.request("https://api.vk.com/method/photos.get", parameters: [
+//            "v": "5.131",
+//            "album_id": "profile",
+//            "rev": "1",
+//            "photos_sizes": "1",
+//            "extended": "1",
+//            "count": "5",
+//            "access_token": session.token,
+//            "user_id": friends[i].id
+//            ]).responseData { data in
+//            guard let data = data.value else { return }
+//
+//            do {
+//                guard let response = try? JSONDecoder().decode(PhotosInitialResponse.self, from: data) else { return }
+//                friendsPhotosInitialResponse?.append(response)
+//            }
+//        }
+//    }
+//    return friendsPhotosInitialResponse
+//}

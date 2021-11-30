@@ -11,12 +11,6 @@ import Alamofire
 
 class LoginViewController: UIViewController {
 
-    @IBOutlet weak var webView: WKWebView! {
-        didSet {
-            webView.navigationDelegate = self
-        }
-    }
-
     let session = Session.instance
 
     @IBOutlet weak var passwordTextField: UITextField!
@@ -29,23 +23,43 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var enterButton: UIButton!
 
+    var webView: WKWebView = {
+        let webConfiguration = WKWebViewConfiguration()
+        let webView = WKWebView(frame: .zero, configuration: webConfiguration)
+        webView.translatesAutoresizingMaskIntoConstraints = false
+        return webView
+    }()
+
+    func setupUI() {
+        self.view.backgroundColor = .white
+        self.view.addSubview(webView)
+        webView.frame = self.view.bounds
+        webView.layer.zPosition = 2
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        var urlComponents = URLComponents()
-        urlComponents.scheme = "https"
-        urlComponents.host = "oauth.vk.com"
-        urlComponents.path = "/authorize"
-        urlComponents.queryItems = [
-            URLQueryItem(name: "client_id", value: "8006884"),
-            URLQueryItem(name: "display", value: "mobile"),
-            URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
-            URLQueryItem(name: "scope", value: "262150"),
-            URLQueryItem(name: "response_type", value: "token"),
-            URLQueryItem(name: "v", value: "5.131")
-        ]
 
-        let request = URLRequest(url: urlComponents.url!)
-        webView.load(request)
+        DispatchQueue.main.async { [self] in
+            setupUI()
+            self.webView.navigationDelegate = self
+            self.webView.uiDelegate = self
+            var urlComponents = URLComponents()
+            urlComponents.scheme = "https"
+            urlComponents.host = "oauth.vk.com"
+            urlComponents.path = "/authorize"
+            urlComponents.queryItems = [
+                URLQueryItem(name: "client_id", value: "8006884"),
+                URLQueryItem(name: "display", value: "mobile"),
+                URLQueryItem(name: "redirect_uri", value: "https://oauth.vk.com/blank.html"),
+                URLQueryItem(name: "scope", value: "photos"),
+                URLQueryItem(name: "response_type", value: "token"),
+                URLQueryItem(name: "v", value: "5.131")
+            ]
+
+            let request = URLRequest(url: urlComponents.url!)
+            self.webView.load(request)
+        }
 
         let gradientLayer = CAGradientLayer()
         gradientLayer.colors = [UIColor(red: 1.00, green: 1.00, blue: 1.00, alpha: 1.00).cgColor, UIColor(red: 0.45, green: 0.68, blue: 1.00, alpha: 1.00).cgColor, UIColor(red: 0.21, green: 0.54, blue: 1.00, alpha: 1.00).cgColor]
@@ -94,7 +108,7 @@ class LoginViewController: UIViewController {
     }
 }
 
-extension LoginViewController: WKNavigationDelegate {
+extension LoginViewController: WKNavigationDelegate, WKUIDelegate {
     func webView(_ webView: WKWebView, decidePolicyFor navigationResponse: WKNavigationResponse, decisionHandler: @escaping (WKNavigationResponsePolicy) -> Void) {
 
         guard let url = navigationResponse.response.url, url.path == "/blank.html", let fragment = url.fragment else {
@@ -115,48 +129,6 @@ extension LoginViewController: WKNavigationDelegate {
 
         session.token = params["access_token"]!
 
-        AF.request("https://api.vk.com/method/friends.get", parameters: [
-            "v": "5.131",
-            "lang": "en",
-            "order": "hints",
-            "count": "5",
-            "fields": "domain",
-            "access_token": session.token
-            ]).responseJSON { data in
-            print(data.value)
-        }
-        
-        AF.request("https://api.vk.com/method/photos.get", parameters: [
-            "v": "5.131",
-            "album_id": "profile",
-            "rev": "1",
-            "extended": "1",
-            "count": "5",
-            "access_token": session.token
-            ]).responseJSON { data in
-            print(data.value)
-        }
-        
-        AF.request("https://api.vk.com/method/groups.get", parameters: [
-            "v": "5.131",
-            "count": "5",
-            "lang": "en",
-            "extended": "1",
-            "access_token": session.token
-            ]).responseJSON { data in
-            print(data.value)
-        }
-        
-        AF.request("https://api.vk.com/method/groups.search", parameters: [
-            "v": "5.131",
-            "q": "panorama",
-            "type": "group",
-            "count": "5",
-            "access_token": session.token
-            ]).responseJSON { data in
-            print(data.value)
-        }
-        
         decisionHandler(.cancel)
         webView.removeFromSuperview()
     }

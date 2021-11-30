@@ -9,18 +9,20 @@ import UIKit
 
 class FriendsViewController: UIViewController {
 
-
+    let session = Session.instance
+    
     @IBOutlet weak var tableView: UITableView!
 
     @IBOutlet weak var searchBar: UISearchBar!
 
+    var friendsIdsArray = [Int]()
     var friendsArray = [Friend]()
     var savedFriendsArray = [Friend]()
 
     func arrayLetter(sourceArray: [Friend]) -> [String] {
         var resultArray = [String]()
         for item in sourceArray {
-            let nameLetter = String(item.name.prefix(1))
+            let nameLetter = String(item.firstName.prefix(1))
             if !resultArray.contains(nameLetter.lowercased()) {
                 resultArray.append(nameLetter.lowercased())
             }
@@ -31,7 +33,7 @@ class FriendsViewController: UIViewController {
     func arrayByLetter(letter: String, sourceArray: [Friend]) -> [Friend] {
         var resultArray = [Friend]()
         for item in sourceArray {
-            let nameLetter = String(item.name.prefix(1))
+            let nameLetter = String(item.firstName.prefix(1))
             if nameLetter.lowercased() == letter.lowercased() {
                 resultArray.append(item)
             }
@@ -41,7 +43,8 @@ class FriendsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        fillFriendsArray()
+        getFriendsInitialResponse()
+        
         savedFriendsArray = friendsArray
         tableView.register(UINib(nibName: customTableViewCell, bundle: nil), forCellReuseIdentifier:
                 reuseIdentifierCustom)
@@ -51,6 +54,11 @@ class FriendsViewController: UIViewController {
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(tapFunction))
         tapRecognizer.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tapRecognizer)
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
 
     @objc func tapFunction() {

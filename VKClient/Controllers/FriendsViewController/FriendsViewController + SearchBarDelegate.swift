@@ -15,7 +15,7 @@ extension FriendsViewController: UISearchBarDelegate {
         } else {
             self.friendsArray = self.savedFriendsArray
             self.friendsArray = self.friendsArray.filter({ friendsItem in
-                friendsItem.name.lowercased().contains(searchText.lowercased()) || friendsItem.surname.lowercased().contains(searchText.lowercased())
+                friendsItem.firstName.lowercased().contains(searchText.lowercased()) || friendsItem.lastName.lowercased().contains(searchText.lowercased())
             })
         }
         self.tableView.reloadData()

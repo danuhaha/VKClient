@@ -31,8 +31,8 @@ class FriendCell: UICollectionViewCell {
 
     func configure(friend: Friend) {
         avatarImage.image = friend.avatar
-        nameLabel.text = friend.name
-        surnameLabel.text = friend.surname
+        nameLabel.text = friend.firstName
+        surnameLabel.text = friend.lastName
     }
 
     @IBAction func pressAvatar(_ sender: Any) {
