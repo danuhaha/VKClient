@@ -6,20 +6,132 @@
 //
 
 import UIKit
+import Alamofire
 
 extension ProfileViewController {
 
-    func fillFriendsArray() {
-        let friend1 = Friend(name: "Lil Uzi", surname: "Vert", avatar: UIImage(named: "liluzi")!, status: "New patek on my wrist", photos: [UIImage(named: "liluzi1")!, UIImage(named: "liluzi2")!, UIImage(named: "liluzi3")!])
-        let friend2 = Friend(name: "Travis", surname: "Scott", avatar: UIImage(named: "travis")!, status: "It's lit!", photos: [UIImage(named: "travis1")!, UIImage(named: "travis2")!, UIImage(named: "travis3")!])
-        let friend3 = Friend(name: "Playboi", surname: "Carti", avatar: UIImage(named: "carti")!, status: "I wanna go to pluto", photos: [UIImage(named: "carti1")!, UIImage(named: "carti2")!, UIImage(named: "carti3")!, UIImage(named: "carti4")!])
-        friendsArray.append(friend1)
-        friendsArray.append(friend2)
-        friendsArray.append(friend3)
+    func getImage(from url: String) -> UIImage? {
+        var image: UIImage?
+        guard let imageURL = URL(string: url) else { return nil }
+
+        guard let imageData = try? Data(contentsOf: imageURL) else { return nil }
+        image = UIImage(data: imageData)
+
+        return image
     }
 
-    func fillPhotosArray() {
-        photosArray = [UIImage(named: "profile1")!, UIImage(named: "profile2")!, UIImage(named: "profile3")!, UIImage(named: "profile4")!, UIImage(named: "profile5")!]
+    func fillFriendsArray(_ friendsInitialResponse: FriendsInitialResponse) {
+
+        let friendsCount = friendsInitialResponse.response.items.count
+        let friends = friendsInitialResponse.response.items
+
+        for i in 0...friendsCount - 1 {
+            guard let avatar = getImage(from: friends[i].avatar) else { return }
+            if friends[i].status != "" {
+                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].status, photos: [UIImage()]))
+            } else {
+                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].domain, photos: [UIImage()]))
+            }
+        }
+
+        friendsArray = friendsArray.sorted { $0.firstName.lowercased() < $1.firstName.lowercased() }
+    }
+
+    func fillPhotosArray(_ photosInitialResponse: PhotosInitialResponse) {
+        let photosCount = photosInitialResponse.response.items.count
+        let photos = photosInitialResponse.response.items
+
+        for i in 0...photosCount - 1 {
+            guard let photo = getImage(from: photos[i].sizes[6].url) else { return }
+            photosArray.append(photo)
+        }
+    }
+
+    func createUser(_ userInitialResponse: UserInitialResponse) {
+        guard let avatar = getImage(from: userInitialResponse.response.avatar) else { return }
+        let firsNname = userInitialResponse.response.firstName
+        let lastName = userInitialResponse.response.lastName
+        let name = "\(firsNname) \(lastName)"
+        let status = userInitialResponse.response.status
+        let birthday = userInitialResponse.response.birthday
+        let hometown = userInitialResponse.response.city.title
+        let university = userInitialResponse.response.universityName
+        let faculty = userInitialResponse.response.facultyName
+        let education = "\(university), \(faculty)"
+
+        user = User(avatar: avatar, name: name, status: status, birthday: birthday, hometown: hometown, education: education, friends: friendsArray, photos: photosArray, posts: postsArray)
+    }
+
+    func getFriendsInitialResponse() {
+
+        AF.request("https://api.vk.com/method/friends.get", parameters: [
+            "v": "5.131",
+            "lang": "en",
+            "order": "hints",
+            "count": "5",
+            "fields": "photo_200,status,domain",
+            "access_token": session.token
+            ]).responseData { data in
+            guard let data = data.value else { return }
+
+            do {
+                guard let response = try? JSONDecoder().decode(FriendsInitialResponse.self, from: data) else { return }
+                self.fillFriendsArray(response)
+                DispatchQueue.main.async {
+                    self.friendsCollectionView.reloadData()
+                }
+            }
+        }
+    }
+
+    func getPhotosInitialResponse() {
+
+        AF.request("https://api.vk.com/method/photos.get", parameters: [
+            "v": "5.131",
+            "album_id": "profile",
+            "rev": "1",
+            "photos_sizes": "1",
+            "extended": "1",
+            "count": "5",
+            "access_token": session.token
+            ]).responseData { data in
+            guard let data = data.value else { return }
+
+            do {
+                guard let response = try? JSONDecoder().decode(PhotosInitialResponse.self, from: data) else { return }
+                self.fillPhotosArray(response)
+                DispatchQueue.main.async {
+                    self.photosCollectionView.reloadData()
+                }
+            }
+        }
+    }
+
+    func getUserInitialResponse() {
+
+        AF.request("https://api.vk.com/method/users.get", parameters: [
+            "v": "5.131",
+            "fields": "photo_max, status, city,education,bdate",
+            "access_token": session.token
+            ]).responseData { data in
+            guard let data = data.value else { return }
+
+            do {
+                guard let response = try? JSONDecoder().decode(UserInitialResponse.self, from: data) else { return }
+                self.createUser(response)
+                DispatchQueue.main.async {
+                    self.avatarImage.image = self.user.avatar
+                    self.avatarImage.layer.cornerRadius = 60
+                    self.avatarImageView.layer.cornerRadius = 60
+                    
+                    self.nameLabel.text = self.user.name
+                    self.statusLabel.text = self.user.status
+                    self.birthdayLabel.text = self.user.birthday
+                    self.hometownLabel.text = self.user.hometown
+                    self.educationLabel.text = self.user.education
+                }
+            }
+        }
     }
 
     func fillPostsArray() {

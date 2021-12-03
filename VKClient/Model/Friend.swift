@@ -8,8 +8,8 @@
 import UIKit
 
 struct Friend {
-    var name = String()
-    var surname = String()
+    var firstName = String()
+    var lastName = String()
     var avatar = UIImage()
     var status = String()
     var photos = [UIImage]()

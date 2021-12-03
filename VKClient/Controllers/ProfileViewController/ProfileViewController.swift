@@ -8,6 +8,8 @@
 import UIKit
 
 class ProfileViewController: UIViewController {
+    
+    let session = Session.instance
 
     var friendsArray = [Friend]()
     var photosArray = [UIImage]()
@@ -30,21 +32,10 @@ class ProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        fillFriendsArray()
-        fillPhotosArray()
+        getFriendsInitialResponse()
+        getPhotosInitialResponse()
+        getUserInitialResponse()
         fillPostsArray()
-
-        user = User(avatar: UIImage(named: "profile")!, name: "Danya Gorin", status: "лил бебра", birthday: "4 March 2002", hometown: "St. Petersburg", education: "MSU, Physics faculty", friends: friendsArray, photos: photosArray)
-
-        avatarImage.image = user.avatar
-        avatarImage.layer.cornerRadius = 60
-        avatarImageView.layer.cornerRadius = 60
-
-        nameLabel.text = user.name
-        statusLabel.text = user.status
-        birthdayLabel.text = user.birthday
-        hometownLabel.text = user.hometown
-        educationLabel.text = user.education
 
         friendsCollectionView.dataSource = self
         friendsCollectionView.delegate = self
