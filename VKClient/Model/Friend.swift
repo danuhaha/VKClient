@@ -13,4 +13,5 @@ struct Friend {
     var avatar = UIImage()
     var status = String()
     var photos = [UIImage]()
+    var id = Int()
 }
