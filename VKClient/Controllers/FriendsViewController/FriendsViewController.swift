@@ -15,7 +15,6 @@ class FriendsViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UISearchBar!
 
-    var friendsIdsArray = [Int]()
     var friendsArray = [Friend]()
     var savedFriendsArray = [Friend]()
 
@@ -70,7 +69,8 @@ class FriendsViewController: UIViewController {
             //let sourceVC = segue.source as? FriendsViewController,
             let destinationVC = segue.destination as? GalleryViewController,
             let friend = sender as? Friend {
-            destinationVC.photos = friend.photos
+            destinationVC.friendId = friend.id
+            destinationVC.avatar = friend.avatar
         }
 
     }

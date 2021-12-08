@@ -58,8 +58,17 @@ extension ProfileViewController {
         let university = userInitialResponse.response.universityName
         let faculty = userInitialResponse.response.facultyName
         let education = "\(university), \(faculty)"
+        
+        self.avatarImage.image = avatar
+        self.avatarImage.layer.cornerRadius = 60
+        self.avatarImageView.layer.cornerRadius = 60
+        
+        self.nameLabel.text = name
+        self.statusLabel.text = status
+        self.birthdayLabel.text = birthday
+        self.hometownLabel.text = hometown
+        self.educationLabel.text = education
 
-        user = User(avatar: avatar, name: name, status: status, birthday: birthday, hometown: hometown, education: education, friends: friendsArray, photos: photosArray, posts: postsArray)
     }
 
     func getFriendsInitialResponse() {
@@ -68,7 +77,7 @@ extension ProfileViewController {
             "v": "5.131",
             "lang": "en",
             "order": "hints",
-            "count": "5",
+            "count": "50",
             "fields": "photo_200,status,domain",
             "access_token": session.token
             ]).responseData { data in
@@ -92,7 +101,7 @@ extension ProfileViewController {
             "rev": "1",
             "photos_sizes": "1",
             "extended": "1",
-            "count": "5",
+            "count": "6",
             "access_token": session.token
             ]).responseData { data in
             guard let data = data.value else { return }
@@ -119,17 +128,7 @@ extension ProfileViewController {
             do {
                 guard let response = try? JSONDecoder().decode(UserInitialResponse.self, from: data) else { return }
                 self.createUser(response)
-                DispatchQueue.main.async {
-                    self.avatarImage.image = self.user.avatar
-                    self.avatarImage.layer.cornerRadius = 60
-                    self.avatarImageView.layer.cornerRadius = 60
-                    
-                    self.nameLabel.text = self.user.name
-                    self.statusLabel.text = self.user.status
-                    self.birthdayLabel.text = self.user.birthday
-                    self.hometownLabel.text = self.user.hometown
-                    self.educationLabel.text = self.user.education
-                }
+                
             }
         }
     }

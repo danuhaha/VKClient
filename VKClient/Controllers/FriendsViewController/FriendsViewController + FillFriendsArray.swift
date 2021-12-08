@@ -20,15 +20,6 @@ extension FriendsViewController {
         return image
     }
 
-    func fillFriendsIdsArray(_ friendsInitialResponse: FriendsInitialResponse) {
-        let friendsCount = friendsInitialResponse.response.items.count
-        let friends = friendsInitialResponse.response.items
-
-        for i in 0...friendsCount - 1 {
-            friendsIdsArray.append(friends[i].id)
-        }
-    }
-
     func fillFriendsArray(_ friendsInitialResponse: FriendsInitialResponse) {
 
         let friendsCount = friendsInitialResponse.response.items.count
@@ -37,9 +28,9 @@ extension FriendsViewController {
         for i in 0...friendsCount - 1 {
             guard let avatar = getImage(from: friends[i].avatar) else { return }
             if friends[i].status != "" {
-                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].status, photos: [UIImage()]))
+                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].status, photos: [UIImage()], id: friends[i].id))
             } else {
-                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].domain, photos: [UIImage()]))
+                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].domain, photos: [UIImage()], id: friends[i].id))
             }
         }
 
@@ -52,7 +43,7 @@ extension FriendsViewController {
             "v": "5.131",
             "lang": "en",
             "order": "hints",
-            "count": "5",
+            "count": "50",
             "fields": "photo_200,status,domain",
             "access_token": session.token
             ]).responseData { data in
@@ -60,7 +51,6 @@ extension FriendsViewController {
 
             do {
                 guard let response = try? JSONDecoder().decode(FriendsInitialResponse.self, from: data) else { return }
-                self.fillFriendsIdsArray(response)
                 self.fillFriendsArray(response)
                 DispatchQueue.main.async {
                     self.tableView.reloadData()
@@ -72,48 +62,7 @@ extension FriendsViewController {
 
 
 
-//for i in 0...friendsCount - 1 {
-//    let friendsPhotosCount = friendsPhotosInitialResponse.response.items.count
-//    let friendsPhotos = friendsPhotosInitialResponse.response.items
-//
-//    var photos = [UIImage]()
-//
-//    for j in 0...friendsPhotosCount - 1 {
-//        guard let photo = getImage(from: friendsPhotos[j].sizes[6].url) else { return }
-//        photos.append(photo)
-//    }
-//
 
 
 
-//func getFriendsPhotosInitialResponse() -> [PhotosInitialResponse]? {
-//    var friendsPhotosInitialResponse: [PhotosInitialResponse]?
-//    let friendsInitialResponse = getFriendsInitialResponse()
-//
-//    guard let friendsCount = friendsInitialResponse?.response.items.count,
-//        let friends = friendsInitialResponse?.response.items
-//        else { return nil }
-//
-//
-//    for i in 0...friendsCount - 1 {
-//
-//        AF.request("https://api.vk.com/method/photos.get", parameters: [
-//            "v": "5.131",
-//            "album_id": "profile",
-//            "rev": "1",
-//            "photos_sizes": "1",
-//            "extended": "1",
-//            "count": "5",
-//            "access_token": session.token,
-//            "user_id": friends[i].id
-//            ]).responseData { data in
-//            guard let data = data.value else { return }
-//
-//            do {
-//                guard let response = try? JSONDecoder().decode(PhotosInitialResponse.self, from: data) else { return }
-//                friendsPhotosInitialResponse?.append(response)
-//            }
-//        }
-//    }
-//    return friendsPhotosInitialResponse
-//}
+
