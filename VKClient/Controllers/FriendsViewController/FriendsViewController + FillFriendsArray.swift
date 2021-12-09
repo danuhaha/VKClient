@@ -22,15 +22,15 @@ extension FriendsViewController {
 
     func fillFriendsArray(_ friendsInitialResponse: FriendsInitialResponse) {
 
-        let friendsCount = friendsInitialResponse.response.items.count
-        let friends = friendsInitialResponse.response.items
+        let friendsCount = friendsInitialResponse.response?.items.count
+        let friends = friendsInitialResponse.response?.items
 
-        for i in 0...friendsCount - 1 {
-            guard let avatar = getImage(from: friends[i].avatar) else { return }
-            if friends[i].status != "" {
-                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].status, photos: [UIImage()], id: friends[i].id))
+        for i in 0...friendsCount! - 1 {
+            guard let avatar = getImage(from: friends![i].avatar) else { return }
+            if friends![i].status != "" {
+                friendsArray.append(Friend(firstName: friends![i].firstName, lastName: friends![i].lastName, avatar: avatar, status: friends![i].status, photos: [UIImage()], id: friends![i].id))
             } else {
-                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].domain, photos: [UIImage()], id: friends[i].id))
+                friendsArray.append(Friend(firstName: friends![i].firstName, lastName: friends![i].lastName, avatar: avatar, status: friends![i].domain, photos: [UIImage()], id: friends![i].id))
             }
         }
 

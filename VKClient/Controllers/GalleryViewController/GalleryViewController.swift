@@ -54,12 +54,12 @@ class GalleryViewController: UIViewController {
 
     func fillPhotos(_ friendsPhotosInitialResponse: PhotosInitialResponse) {
 
-        let friendPhotosCount = friendsPhotosInitialResponse.response.items.count
-        let friendPhotos = friendsPhotosInitialResponse.response.items
+        let friendPhotosCount = friendsPhotosInitialResponse.response?.items.count
+        let friendPhotos = friendsPhotosInitialResponse.response?.items
 
-        if friendPhotosCount > 1 {
-            for i in 0...friendPhotosCount - 1 {
-                guard let photo = getImage(from: friendPhotos[i].sizes[6].url) else { return }
+        if friendPhotosCount! > 1 {
+            for i in 0...friendPhotosCount! - 1 {
+                guard let photo = getImage(from: friendPhotos![i].sizes[6].url) else { return }
                 photos.append(photo)
             }
         } else {

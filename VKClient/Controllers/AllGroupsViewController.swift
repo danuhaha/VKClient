@@ -30,14 +30,14 @@ class AllGroupsViewController: UIViewController {
 
     func fillAllGroupsArray(_ groupsInitialResponse: GroupsInitialResponse) {
 
-        let groupsCount = groupsInitialResponse.response.items.count
-        let groups = groupsInitialResponse.response.items
+        let groupsCount = groupsInitialResponse.response?.items.count
+        let groups = groupsInitialResponse.response?.items
 
-        for i in 0...groupsCount - 1 {
+        for i in 0...groupsCount! - 1 {
 
-            guard let avatar = getImage(from: groups[i].avatar) else { return }
+            guard let avatar = getImage(from: groups![i].avatar) else { return }
 
-            allGroupsArray.append(Group(title: groups[i].title, followers: "\(groups[i].followers) followers", avatar: avatar))
+            allGroupsArray.append(Group(title: groups![i].title, followers: "\(groups![i].followers) followers", avatar: avatar))
         }
     }
 
