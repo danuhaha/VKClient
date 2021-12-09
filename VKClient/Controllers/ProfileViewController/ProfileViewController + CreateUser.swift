@@ -22,15 +22,15 @@ extension ProfileViewController {
 
     func fillFriendsArray(_ friendsInitialResponse: FriendsInitialResponse) {
 
-        let friendsCount = friendsInitialResponse.response.items.count
-        let friends = friendsInitialResponse.response.items
+        let friendsCount = friendsInitialResponse.response?.items.count
+        let friends = friendsInitialResponse.response?.items
 
-        for i in 0...friendsCount - 1 {
-            guard let avatar = getImage(from: friends[i].avatar) else { return }
-            if friends[i].status != "" {
-                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].status, photos: [UIImage()]))
+        for i in 0...friendsCount! - 1 {
+            guard let avatar = getImage(from: friends![i].avatar) else { return }
+            if friends![i].status != "" {
+                friendsArray.append(Friend(firstName: friends![i].firstName, lastName: friends![i].lastName, avatar: avatar, status: friends![i].status, photos: [UIImage()]))
             } else {
-                friendsArray.append(Friend(firstName: friends[i].firstName, lastName: friends[i].lastName, avatar: avatar, status: friends[i].domain, photos: [UIImage()]))
+                friendsArray.append(Friend(firstName: friends![i].firstName, lastName: friends![i].lastName, avatar: avatar, status: friends![i].domain, photos: [UIImage()]))
             }
         }
 
@@ -38,25 +38,25 @@ extension ProfileViewController {
     }
 
     func fillPhotosArray(_ photosInitialResponse: PhotosInitialResponse) {
-        let photosCount = photosInitialResponse.response.items.count
-        let photos = photosInitialResponse.response.items
+        let photosCount = photosInitialResponse.response?.items.count
+        let photos = photosInitialResponse.response?.items
 
-        for i in 0...photosCount - 1 {
-            guard let photo = getImage(from: photos[i].sizes[6].url) else { return }
+        for i in 0...photosCount! - 1 {
+            guard let photo = getImage(from: photos![i].sizes[6].url) else { return }
             photosArray.append(photo)
         }
     }
 
     func createUser(_ userInitialResponse: UserInitialResponse) {
-        guard let avatar = getImage(from: userInitialResponse.response.avatar) else { return }
-        let firsNname = userInitialResponse.response.firstName
-        let lastName = userInitialResponse.response.lastName
+        guard let avatar = getImage(from: userInitialResponse.response!.avatar) else { return }
+        let firsNname = userInitialResponse.response?.firstName
+        let lastName = userInitialResponse.response?.lastName
         let name = "\(firsNname) \(lastName)"
-        let status = userInitialResponse.response.status
-        let birthday = userInitialResponse.response.birthday
-        let hometown = userInitialResponse.response.city.title
-        let university = userInitialResponse.response.universityName
-        let faculty = userInitialResponse.response.facultyName
+        let status = userInitialResponse.response?.status
+        let birthday = userInitialResponse.response?.birthday
+        let hometown = userInitialResponse.response?.city.title
+        let university = userInitialResponse.response?.universityName
+        let faculty = userInitialResponse.response?.facultyName
         let education = "\(university), \(faculty)"
         
         self.avatarImage.image = avatar

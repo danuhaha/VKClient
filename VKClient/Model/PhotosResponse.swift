@@ -7,26 +7,56 @@
 
 import Foundation
 import UIKit
+import RealmSwift
+import Realm
 
-struct PhotosInitialResponse: Codable {
-    let response: PhotosResponse
+class PhotosInitialResponse: Object, Codable {
+    @objc dynamic var response: PhotosResponse? = nil
 }
 
-struct PhotosResponse: Codable {
-    let count: Int
-    let items: [PhotosItems]
+@objcMembers
+class PhotosResponse: Object, Codable {
+    dynamic var count: Int = 0
+    dynamic let items = List<PhotosItems>()
+
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        count = try container.decode(Int.self, forKey: .count)
+        let itemsList = try container.decode([PhotosItems].self, forKey: .items)
+        items.append(objectsIn: itemsList)
+        super.init()
+    }
+
+    required override init() {
+        super.init()
+    }
 }
 
-struct PhotosItems: Codable {
-    let likes: PhotosLikes
-    let sizes: [PhotosSizes]
+@objcMembers
+class PhotosItems: Object, Codable {
+    dynamic var likes: PhotosLikes? = nil
+    dynamic let sizes = List<PhotosSizes>()
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        likes = try container.decode(PhotosLikes.self, forKey: .likes)
+        let sizesList = try container.decode([PhotosSizes].self, forKey: .sizes)
+        sizes.append(objectsIn: sizesList)
+        super.init()
+    }
+
+    required override init() {
+        super.init()
+    }
 }
 
-struct PhotosLikes: Codable {
-    let count: Int
+class PhotosLikes: Object, Codable {
+    @objc dynamic var count: Int
 }
 
-struct PhotosSizes: Codable {
-    let url: String
-    let type: String
+class PhotosSizes: Object, Codable {
+    @objc dynamic var url: String
+    @objc dynamic var type: String
 }

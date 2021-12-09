@@ -7,23 +7,25 @@
 
 import Foundation
 import UIKit
+import RealmSwift
+import Realm
 
-struct UserInitialResponse: Codable {
-    let response: UserResponse
+class UserInitialResponse: Object, Codable {
+    @objc dynamic let response: UserResponse? = nil
 }
 
-struct UserResponse: Codable {
-    let id: Int
-    let firstName: String
-    let lastName: String
-    let birthday: String
-    let avatar: String
-    let status: String
-    let universityName: String
-    let facultyName: String
-    let city: UserCity
+class UserResponse: Object, Codable {
+    @objc dynamic let id: Int
+    @objc dynamic let firstName: String
+    @objc dynamic let lastName: String
+    @objc dynamic let birthday: String
+    @objc dynamic let avatar: String
+    @objc dynamic let status: String
+    @objc dynamic let universityName: String
+    @objc dynamic let facultyName: String
+    @objc dynamic let city: UserCity
 }
 
-struct UserCity: Codable {
-    let title: String
+class UserCity: Object, Codable {
+    @objc dynamic let title: String
 }
