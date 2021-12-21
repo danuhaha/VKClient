@@ -17,7 +17,7 @@ class GroupsInitialResponse: Object, Codable {
 @objcMembers
 class GroupsResponse: Object, Codable {
     dynamic var count: Int = 0
-    dynamic let items = List<GroupsItems>()
+    dynamic var items = List<GroupsItems>()
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

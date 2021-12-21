@@ -17,7 +17,7 @@ class PhotosInitialResponse: Object, Codable {
 @objcMembers
 class PhotosResponse: Object, Codable {
     dynamic var count: Int = 0
-    dynamic let items = List<PhotosItems>()
+    dynamic var items = List<PhotosItems>()
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -36,7 +36,7 @@ class PhotosResponse: Object, Codable {
 @objcMembers
 class PhotosItems: Object, Codable {
     dynamic var likes: PhotosLikes? = nil
-    dynamic let sizes = List<PhotosSizes>()
+    dynamic var sizes = List<PhotosSizes>()
     
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)

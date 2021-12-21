@@ -16,7 +16,7 @@ class FriendsInitialResponse: Object, Codable {
 @objcMembers
 class FriendsResponse: Object, Codable {
     dynamic var count: Int = 0
-    dynamic let items = List<FriendsItems>()
+    dynamic var items = List<FriendsItems>()
 
     required init(from decoder: Decoder) throws {
         let container = try decoder.container(keyedBy: CodingKeys.self)
@@ -48,4 +48,7 @@ class FriendsItems: Object, Codable {
         case status = "status"
         case domain = "domain"
     }
+
+    
+
 }

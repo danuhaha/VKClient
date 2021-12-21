@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class AllGroupsViewController: UIViewController {
 
@@ -28,16 +29,23 @@ class AllGroupsViewController: UIViewController {
         return image
     }
 
-    func fillAllGroupsArray(_ groupsInitialResponse: GroupsInitialResponse) {
+    func fillAllGroupsArray() {
 
-        let groupsCount = groupsInitialResponse.response?.items.count
-        let groups = groupsInitialResponse.response?.items
+        do {
+            let realm = try Realm()
+            let groupItems = realm.objects(GroupsItems.self)
 
-        for i in 0...groupsCount! - 1 {
+            let groupsCount = groupItems.count
+            let groups = groupItems
 
-            guard let avatar = getImage(from: groups![i].avatar) else { return }
+            for i in 0...groupsCount - 1 {
 
-            allGroupsArray.append(Group(title: groups![i].title, followers: "\(groups![i].followers) followers", avatar: avatar))
+                guard let avatar = getImage(from: groups[i].avatar) else { return }
+
+                allGroupsArray.append(Group(title: groups[i].title, followers: "\(groups[i].followers) followers", avatar: avatar))
+            }
+        } catch {
+            print(error)
         }
     }
 
@@ -49,16 +57,31 @@ class AllGroupsViewController: UIViewController {
             "extended": "1",
             "fields": "members_count",
             "access_token": session.token
-            ]).responseData { data in
+            ]).responseData { [weak self] data in
             guard let data = data.value else { return }
 
             do {
                 guard let response = try? JSONDecoder().decode(GroupsInitialResponse.self, from: data) else { return }
-                self.fillAllGroupsArray(response)
+
+                self?.saveGroups(Array(response.response!.items))
+
                 DispatchQueue.main.async {
-                    self.tableView.reloadData()
+                    self?.tableView.reloadData()
                 }
             }
+        }
+    }
+
+    func saveGroups(_ groupsItems: [GroupsItems]) {
+        do {
+            let realm = try Realm()
+            let oldGroupsItems = realm.objects(GroupsItems.self)
+            realm.beginWrite()
+            realm.delete(oldGroupsItems)
+            realm.add(groupsItems)
+            try realm.commitWrite()
+        } catch {
+            print(error)
         }
     }
 
@@ -69,8 +92,10 @@ class AllGroupsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getGroupsInitialResponse()
-        
+        DispatchQueue.main.async {
+            self.fillAllGroupsArray()
+        }
+
         tableView.register(UINib(nibName: customTableViewCell, bundle: nil), forCellReuseIdentifier:
                 reuseIdentifierCustom)
         tableView.delegate = self

@@ -42,7 +42,9 @@ class FriendsViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        getFriendsInitialResponse()
+        DispatchQueue.main.async {
+            self.fillFriendsArray()
+        }
         
         savedFriendsArray = friendsArray
         tableView.register(UINib(nibName: customTableViewCell, bundle: nil), forCellReuseIdentifier:
