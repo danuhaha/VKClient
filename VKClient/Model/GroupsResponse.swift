@@ -7,21 +7,38 @@
 
 import Foundation
 import UIKit
+import RealmSwift
+import Realm
 
-struct GroupsInitialResponse: Codable {
-    let response: GroupsResponse
+class GroupsInitialResponse: Object, Codable {
+    @objc dynamic var response: GroupsResponse? = nil
 }
 
-struct GroupsResponse: Codable {
-    let count: Int
-    let items: [GroupsItems]
+@objcMembers
+class GroupsResponse: Object, Codable {
+    dynamic var count: Int = 0
+    dynamic var items = List<GroupsItems>()
+    
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        count = try container.decode(Int.self, forKey: .count)
+        let itemsList = try container.decode([GroupsItems].self, forKey: .items)
+        items.append(objectsIn: itemsList)
+        super.init()
+    }
+
+    required override init() {
+        super.init()
+    }
 }
 
-struct GroupsItems: Codable {
-    let id: Int
-    let title: String
-    let avatar: String
-    let followers: Int
+@objcMembers
+class GroupsItems: Object, Codable {
+    dynamic var id: Int
+    dynamic var title: String
+    dynamic var avatar: String
+    dynamic var followers: Int
 
     enum CodingKeys: String, CodingKey {
         case id = "id"

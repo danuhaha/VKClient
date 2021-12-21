@@ -7,6 +7,7 @@
 
 import UIKit
 import Alamofire
+import RealmSwift
 
 class GalleryViewController: UIViewController {
 
@@ -24,6 +25,9 @@ class GalleryViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         getFriendsPhotosInitialResponse()
+        DispatchQueue.main.async {
+            self.fillPhotos()
+        }
 
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -41,29 +45,38 @@ class GalleryViewController: UIViewController {
             "count": "20",
             "access_token": session.token,
             "user_id": friendId
-            ]).responseData { data in
+            ]).responseData { [weak self] data in
             guard let data = data.value else { return }
             guard let response = try? JSONDecoder().decode(PhotosInitialResponse.self, from: data) else { return }
-            self.fillPhotos(response)
+
+            self?.savePhotos(Array(response.response!.items))
+
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self?.collectionView.reloadData()
             }
         }
     }
 
 
-    func fillPhotos(_ friendsPhotosInitialResponse: PhotosInitialResponse) {
+    func fillPhotos() {
 
-        let friendPhotosCount = friendsPhotosInitialResponse.response.items.count
-        let friendPhotos = friendsPhotosInitialResponse.response.items
+        do {
+            let realm = try Realm()
+            let photosItems = realm.objects(PhotosItems.self)
 
-        if friendPhotosCount > 1 {
-            for i in 0...friendPhotosCount - 1 {
-                guard let photo = getImage(from: friendPhotos[i].sizes[6].url) else { return }
-                photos.append(photo)
+            let friendPhotosCount = photosItems.count
+            let friendPhotos = photosItems
+
+            if friendPhotosCount > 1 {
+                for i in 0...friendPhotosCount - 1 {
+                    guard let photo = getImage(from: friendPhotos[i].sizes[6].url) else { return }
+                    photos.append(photo)
+                }
+            } else {
+                photos.append(avatar)
             }
-        } else {
-            photos.append(avatar)
+        } catch {
+            print(error)
         }
     }
 
@@ -75,5 +88,18 @@ class GalleryViewController: UIViewController {
         image = UIImage(data: imageData)
 
         return image
+    }
+
+    func savePhotos(_ photosItems: [PhotosItems]) {
+        do {
+            let realm = try Realm()
+            let oldPhotosItems = realm.objects(PhotosItems.self)
+            realm.beginWrite()
+            realm.delete(oldPhotosItems)
+            realm.add(photosItems)
+            try realm.commitWrite()
+        } catch {
+            print(error)
+        }
     }
 }

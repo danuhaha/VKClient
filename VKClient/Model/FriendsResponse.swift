@@ -7,24 +7,38 @@
 
 import Foundation
 import UIKit
+import RealmSwift
+import Realm
 
+class FriendsInitialResponse: Object, Codable {
+    @objc dynamic var response: FriendsResponse? = nil
+}
+@objcMembers
+class FriendsResponse: Object, Codable {
+    dynamic var count: Int = 0
+    dynamic var items = List<FriendsItems>()
 
-struct FriendsInitialResponse: Codable {
-    let response: FriendsResponse
+    required init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+
+        count = try container.decode(Int.self, forKey: .count)
+        let itemsList = try container.decode([FriendsItems].self, forKey: .items)
+        items.append(objectsIn: itemsList)
+        super.init()
+    }
+
+    required override init() {
+        super.init()
+    }
 }
 
-struct FriendsResponse: Codable {
-    let count: Int
-    let items: [FriendsItems]
-}
-
-struct FriendsItems: Codable {
-    let firstName: String
-    let lastName: String
-    let id: Int
-    let avatar: String
-    let status: String
-    let domain: String
+class FriendsItems: Object, Codable {
+    @objc dynamic var firstName: String
+    @objc dynamic var lastName: String
+    @objc dynamic var id: Int
+    @objc dynamic var avatar: String
+    @objc dynamic var status: String
+    @objc dynamic var domain: String
 
     enum CodingKeys: String, CodingKey {
         case firstName = "first_name"
@@ -34,4 +48,7 @@ struct FriendsItems: Codable {
         case status = "status"
         case domain = "domain"
     }
+
+    
+
 }
